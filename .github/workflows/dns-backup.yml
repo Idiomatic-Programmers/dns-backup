@@ -1,0 +1,14 @@
+name: DNS Backup
+on: [push]
+jobs:
+  dns-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull flares image
+        run: docker pull lfaoro/flares
+      - name: Fetch DNS Records
+        run: docker run -it --rm -e CF_API_TOKEN="$CF_API_TOKEN" lfaoro/flares idiomaticprogrammers.com > idiomaticprogrammers.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: idiomaticprogrammers.txt
