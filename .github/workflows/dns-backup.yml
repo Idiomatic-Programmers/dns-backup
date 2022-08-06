@@ -1,5 +1,7 @@
 name: DNS Backup
-on: [push]
+on:
+  schedule:
+    - cron: "0 17 7 * *"
 jobs:
   dns-backup:
     runs-on: ubuntu-latest
@@ -10,7 +12,7 @@ jobs:
         run: docker pull lfaoro/flares
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%m-%Y')"
       - name: Fetch DNS Records
         run: docker run -e CF_API_TOKEN="$CF_API_TOKEN" lfaoro/flares idiomaticprogrammers.com > idiomaticprogrammers.txt
       - name: Release
