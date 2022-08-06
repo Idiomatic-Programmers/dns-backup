@@ -7,7 +7,7 @@ jobs:
       - name: Pull flares image
         run: docker pull lfaoro/flares
       - name: Fetch DNS Records
-        run: docker run --rm -e CF_API_TOKEN="$CF_API_TOKEN" lfaoro/flares idiomaticprogrammers.com > idiomaticprogrammers.txt
+        run: docker run -e CF_API_TOKEN="$CF_API_TOKEN" lfaoro/flares idiomaticprogrammers.com > idiomaticprogrammers.txt
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
