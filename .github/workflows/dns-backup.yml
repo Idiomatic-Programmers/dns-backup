@@ -3,6 +3,8 @@ on: [push]
 jobs:
   dns-backup:
     runs-on: ubuntu-latest
+    env:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
     steps:
       - name: Pull flares image
         run: docker pull lfaoro/flares
